@@ -19,6 +19,14 @@ A plataforma funciona como um **gatilho de engajamento social**: os tutores pree
 
 ---
 
+## 📸 Exemplo do Documento Gerado
+
+<p align="center">
+  <img src="assets/img/exemplo-rg-pet.png" alt="Exemplo do RG Pet Gerado" width="400">
+</p>
+
+---
+
 ## ✨ Funcionalidades Principais
 
 - 🐶 **Geração do RG Pet em Tempo Real:** Atualização instantânea da carteirinha conforme o tutor digita os dados do animal.
@@ -27,6 +35,14 @@ A plataforma funciona como um **gatilho de engajamento social**: os tutores pree
 - 📅 **Integração com Google Agenda:** Automação de lembrete preventivo para a vacinação antirrábica municipal.
 - 🛡️ **Privacidade & Segurança (LGPD):** Leitura de fotos em Base64 através da API nativa `FileReader`, sem upload ou envio de imagens para servidores externos.
 - 🖨️ **Layout de Impressão Otimizado:** Formatação pronta para recorte e plastificação (tamanho padrão RG 10,5cm x 7,5cm).
+
+---
+
+## 📄 Material de Divulgação (Cartaz Impresso)
+
+Além da plataforma web, o projeto conta com um **cartaz de divulgação impresso** (com QR Code para direcionamento direto ao site), preparado para afixação em pontos estratégicos de Nova Mamoré - RO (mural de avisos da Prefeitura, Unidades Básicas de Saúde, clínicas veterinárias e pet shops).
+
+- 📥 **[Baixar o Poster de Divulgação (PDF)](assets/docs/poster-divulgacao-nova-mamore.pdf)**
 
 ---
 
