@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>RG Pet Digital - Identificação e Conscientização Animal</title>
+
+    <!-- Estilos Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Tipografia e Ícones do Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Configuração personalizada do Tailwind -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#fdfcf0",
+                        primary: "#000000",
+                        secondary: "#fbbf24", // Amarelo vibrante
+                        accent: "#fb7185", // Rosa/Coral
+                        surface: "#ffffff",
+                        "surface-dim": "#f4f4f0",
+                    },
+                    borderRadius: {
+                        DEFAULT: "0px",
+                        lg: "0px",
+                        xl: "0px",
+                        full: "9999px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["Bricolage Grotesque", "sans-serif"],
+                        "headline-md": ["Bricolage Grotesque", "sans-serif"],
+                        "headline-sm": ["Bricolage Grotesque", "sans-serif"],
+                        "label-md": ["Caveat", "cursive"],
+                        "body-lg": ["JetBrains Mono", "monospace"],
+                        "body-md": ["JetBrains Mono", "monospace"]
+                    },
+                    boxShadow: {
+                        'brutal': '5px 5px 0px 0px rgba(0,0,0,1)',
+                        'brutal-sm': '3px 3px 0px 0px rgba(0,0,0,1)',
+                        'brutal-hover': '7px 7px 0px 0px rgba(0,0,0,1)',
+                        'brutal-active': '1px 1px 0px 0px rgba(0,0,0,1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Estilos customizados da aplicação -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="font-body-md text-primary bg-background antialiased relative overflow-x-hidden" id="top">
+
+    <!-- Cabeçalho e Menu de Navegação -->
+    <header
+        class="w-full sticky top-0 z-50 bg-[#fdfcf0] border-b-3 border-black shadow-[0_4px_10px_rgba(0,0,0,0.08)] py-2.5 transition-all">
+        <div class="max-w-5xl mx-auto px-4">
+            <nav
+                class="relative z-50 flex justify-between items-center w-full px-5 py-2.5 bg-secondary brutal-border shadow-brutal transform -rotate-1 hover:rotate-0 transition-transform">
+                <a class="text-xl md:text-2xl font-display-lg text-primary uppercase tracking-tighter bg-white px-3 py-1 brutal-border shadow-brutal-sm"
+                    href="#top">RG Pet Digital</a>
+                <div class="hidden md:flex gap-3 items-center" id="nav-links">
+                    <a class="nav-link text-primary text-sm font-body-lg font-bold uppercase bg-accent px-2.5 py-1 brutal-border shadow-brutal-sm transform rotate-1"
+                        href="#top">Início</a>
+                    <a class="nav-link text-primary text-sm font-body-lg font-bold uppercase hover:bg-white hover:text-black px-2.5 py-1 brutal-border transition-colors"
+                        href="#rg-generator">RG Digital</a>
+                    <a class="nav-link text-primary text-sm font-body-lg font-bold uppercase hover:bg-white hover:text-black px-2.5 py-1 brutal-border transition-colors"
+                        href="#saude-info">Saúde</a>
+                    <a class="nav-link text-primary text-sm font-body-lg font-bold uppercase hover:bg-white hover:text-black px-2.5 py-1 brutal-border transition-colors"
+                        href="#campanha">Campanhas</a>
+                </div>
+                <button
+                    class="bg-accent text-primary px-4 py-1.5 brutal-border font-body-lg font-bold text-sm uppercase shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 active:shadow-brutal-active active:translate-y-0.5 transition-all"
+                    id="btn-entrar">
+                    Entrar
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Elementos decorativos de fundo -->
+    <div
+        class="absolute top-32 left-8 text-accent transform -rotate-12 z-0 opacity-70 hidden lg:block pointer-events-none">
+        <span class="material-symbols-outlined" style="font-size: 50px; font-variation-settings: 'FILL' 1;">star</span>
+    </div>
+    <div
+        class="absolute top-80 right-10 text-secondary transform rotate-45 z-0 opacity-70 hidden lg:block pointer-events-none">
+        <span class="material-symbols-outlined" style="font-size: 60px; font-variation-settings: 'FILL' 1;">pets</span>
+    </div>
+    <div
+        class="absolute bottom-1/3 left-12 text-white transform rotate-12 z-0 opacity-70 hidden lg:block brutal-border bg-primary rounded-full p-1.5 pointer-events-none">
+        <span class="material-symbols-outlined text-white"
+            style="font-size: 36px; font-variation-settings: 'FILL' 1;">favorite</span>
+    </div>
+
+    <main class="w-full relative z-10 mt-8">
+
+        <!-- Seção Principal (Hero) -->
+        <section class="text-center pt-10 pb-12 md:pt-14 md:pb-16 px-4 max-w-4xl mx-auto relative print:hidden">
+            <div class="absolute -top-4 -left-6 w-28 h-28 z-20 hidden md:block">
+                <img alt="Adesivo Pet" class="sticker-img w-full h-full object-cover bg-white"
+                    src="assets/img/pet-card-icon.jpeg">
+            </div>
+            <h1
+                class="text-3xl sm:text-4xl md:text-5xl font-display-lg text-primary mb-5 leading-tight uppercase tracking-tighter bg-white inline-block px-5 py-3 brutal-border shadow-brutal transform rotate-1">
+                Vamos registrar seu <br><span class="bg-secondary px-3 transform inline-block -rotate-1">melhor
+                    amigo</span>!
+            </h1>
+            <p
+                class="text-base md:text-lg font-body-md font-bold text-primary max-w-xl mx-auto leading-relaxed bg-accent px-5 py-3 brutal-border shadow-brutal-sm transform -rotate-1 mt-3">
+                Crie o RG Pet Digital do seu animal. Um documento simbólico cheio de carinho, ideal para identificação
+                afetiva e para promover a conscientização sobre a saúde e vacinação dos pets.
+            </p>
+        </section>
+
+        <!-- Seção do Gerador de RG -->
+        <section class="max-w-5xl mx-auto px-4 mb-24 md:mb-32 relative mt-12 md:mt-16" id="rg-generator">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- Formulário de dados do Pet -->
+                <div class="lg:col-span-6 bg-secondary p-5 md:p-6 brutal-border shadow-brutal relative z-20">
+                    <div class="absolute -top-5 -right-4 w-20 h-20 z-30">
+                        <img alt="Ilustração Pet" class="sticker-img-2 w-full h-full object-cover bg-white"
+                            src="assets/img/pet-card-icon.jpeg">
+                    </div>
+                    <h2
+                        class="text-2xl font-display-lg text-primary mb-6 bg-white inline-block px-3 py-1.5 brutal-border shadow-brutal-sm uppercase">
+                        A história do Pet</h2>
+                    <form class="space-y-4" id="rg-form">
+                        <div class="space-y-3.5">
+                            <div class="relative">
+                                <label
+                                    class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform -rotate-1 inline-block bg-white px-2 brutal-border"
+                                    for="petName">Qual o nome dele?</label>
+                                <input class="w-full premium-input" id="petName" placeholder="Ex: Rex" type="text">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="relative">
+                                    <label
+                                        class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform rotate-1 inline-block bg-white px-2 brutal-border"
+                                        for="species">Espécie</label>
+                                    <select class="w-full premium-input" id="species">
+                                        <option value="Canina">Canina</option>
+                                        <option value="Felina">Felina</option>
+                                        <option value="Outros">Outro</option>
+                                    </select>
+                                </div>
+                                <div class="relative">
+                                    <label
+                                        class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform -rotate-1 inline-block bg-white px-2 brutal-border"
+                                        for="sex">Sexo</label>
+                                    <select class="w-full premium-input" id="sex">
+                                        <option value="Macho">Macho</option>
+                                        <option value="Fêmea">Fêmea</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div class="relative">
+                                    <label
+                                        class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform -rotate-1 inline-block bg-white px-2 brutal-border"
+                                        for="breed">Raça</label>
+                                    <input class="w-full premium-input px-2.5 py-2 text-xs sm:text-sm" id="breed"
+                                        placeholder="Ex: SRD" type="text">
+                                </div>
+                                <div class="relative">
+                                    <label
+                                        class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform rotate-1 inline-block bg-white px-2 brutal-border"
+                                        for="furType">Pelagem</label>
+                                    <input class="w-full premium-input px-2.5 py-2 text-xs sm:text-sm" id="furType"
+                                        placeholder="Ex: Liso" type="text">
+                                </div>
+                                <div class="relative">
+                                    <label
+                                        class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform -rotate-1 inline-block bg-white px-2 brutal-border"
+                                        for="color">Cor</label>
+                                    <input class="w-full premium-input px-2.5 py-2 text-xs sm:text-sm" id="color"
+                                        placeholder="Ex: Caramelo" type="text">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="relative">
+                                    <label
+                                        class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform rotate-1 inline-block bg-white px-2 brutal-border"
+                                        for="weight">Peso (kg)</label>
+                                    <input class="w-full premium-input" id="weight" placeholder="Ex: 12.5" step="0.1"
+                                        type="number">
+                                </div>
+                                <div class="relative">
+                                    <label
+                                        class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform -rotate-1 inline-block bg-white px-2 brutal-border"
+                                        for="microchip">Microchip ID</label>
+                                    <input class="w-full premium-input" id="microchip" placeholder="000.000.000"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-center gap-2 mt-1 bg-white p-2 brutal-border shadow-brutal-sm transform -rotate-1">
+                                <input class="brutal-border text-primary focus:ring-primary h-4 w-4 bg-white"
+                                    id="no-microchip" type="checkbox">
+                                <label class="text-xs font-body-md font-bold text-primary cursor-pointer select-none"
+                                    for="no-microchip">Meu pet não possui microchip</label>
+                            </div>
+                            <div class="relative pt-1">
+                                <label
+                                    class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform rotate-1 inline-block bg-white px-2 brutal-border"
+                                    for="tutorName">Seu Nome (Tutor)</label>
+                                <input class="w-full premium-input" id="tutorName" placeholder="Como você se chama?"
+                                    type="text">
+                            </div>
+                            <div class="relative">
+                                <label
+                                    class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-1 transform -rotate-1 inline-block bg-white px-2 brutal-border"
+                                    for="phone">Telefone de Contato</label>
+                                <input class="w-full premium-input" id="phone" placeholder="(00) 00000-0000" type="tel">
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <label
+                                class="block text-xs sm:text-sm font-display-lg font-bold uppercase text-primary mb-2 transform rotate-1 inline-block bg-accent px-2 brutal-border">Foto
+                                do Pet</label>
+                            <label for="file-upload"
+                                class="flex justify-center px-4 py-6 brutal-border bg-white cursor-pointer group hover:bg-surface-dim transition-colors shadow-brutal-sm">
+                                <div class="space-y-2 text-center">
+                                    <div
+                                        class="w-12 h-12 mx-auto bg-secondary brutal-border flex items-center justify-center transform group-hover:rotate-12 transition-transform">
+                                        <span class="material-symbols-outlined text-2xl text-primary">add_a_photo</span>
+                                    </div>
+                                    <div class="flex text-xs justify-center font-body-lg font-bold">
+                                        <span class="relative cursor-pointer uppercase">
+                                            <span id="file-label-text">Escolher foto</span>
+                                            <input class="sr-only" id="file-upload" name="file-upload" type="file"
+                                                accept="image/*">
+                                        </span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="pt-1">
+                            <div
+                                class="flex items-center gap-3 mb-3 p-3 bg-white brutal-border shadow-brutal-sm transform rotate-1">
+                                <input class="brutal-border text-primary focus:ring-primary h-4 w-4 bg-white"
+                                    id="include-tutor-photo" type="checkbox">
+                                <label
+                                    class="text-xs sm:text-sm font-body-md font-bold text-primary cursor-pointer select-none uppercase"
+                                    for="include-tutor-photo">Adicionar minha foto no verso</label>
+                            </div>
+                            <label for="tutor-file-upload"
+                                class="justify-center px-4 py-5 brutal-border bg-white cursor-pointer group hover:bg-surface-dim transition-colors shadow-brutal-sm hidden"
+                                id="tutor-photo-upload-area">
+                                <div class="space-y-2 text-center">
+                                    <div
+                                        class="w-10 h-10 mx-auto bg-accent brutal-border flex items-center justify-center transform group-hover:-rotate-12 transition-transform">
+                                        <span class="material-symbols-outlined text-xl text-primary">person_add</span>
+                                    </div>
+                                    <div class="flex text-xs justify-center font-body-lg font-bold">
+                                        <span class="relative cursor-pointer uppercase">
+                                            <span id="tutor-file-label-text">Sua foto</span>
+                                            <input class="sr-only" id="tutor-file-upload" name="tutor-file-upload"
+                                                type="file" accept="image/*">
+                                        </span>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Coluna de Prévia do RG -->
+                <div class="lg:col-span-6 flex flex-col items-center justify-start p-2 lg:p-4 z-10 relative">
+                    <div class="absolute top-2 right-4 text-accent transform rotate-12 z-0 hidden sm:block">
+                        <span class="material-symbols-outlined"
+                            style="font-size: 40px; font-variation-settings: 'FILL' 1;">burst_mode</span>
+                    </div>
+                    <h3
+                        class="text-xl font-display-lg font-bold text-primary mb-6 bg-white px-4 py-2 brutal-border shadow-brutal transform rotate-1 uppercase inline-block relative z-20">
+                        Prévia do Documento</h3>
+
+                    <!-- Guia para Impressão e Dobra (Fora da borda de corte) -->
+                    <div class="print-only-instructions text-center p-2.5 brutal-border bg-yellow-100 text-primary w-full max-w-[460px] mb-3"
+                        id="print-instructions-box">
+                        <h4 class="text-xs font-display-lg font-black uppercase mb-0.5">Guia para Recorte, Dobra &
+                            Plastificação</h4>
+                        <p class="text-[9px] font-bold leading-tight">1. ✂️ <strong>Corte:</strong> Recorte contornando
+                            a linha preta externa contínua do documento abaixo.</p>
+                        <p class="text-[9px] font-bold leading-tight">2. 📐 <strong>Dobra:</strong> Dobre ao meio no
+                            espaço entre a Frente e o Verso.</p>
+                        <p class="text-[9px] font-bold leading-tight text-black">3. ✨ <strong>Plastificação:</strong>
+                            Plastifique em polaseal padrão RG (10,5cm x 7,5cm).</p>
+                    </div>
+
+                    <!-- Documento RG Pet (Frente e Verso) -->
+                    <div class="flex flex-col gap-6 relative w-full max-w-[460px] mx-auto items-center tape-edge bg-white p-4 sm:p-6 brutal-border shadow-brutal transform -rotate-1 print:p-0 print:border-none print:shadow-none print:transform-none"
+                        id="card-preview-container">
+
+                        <!-- Wrapper Único para Corte (Frente + Verso com Borda Única para Corte) -->
+                        <div class="w-full flex flex-col brutal-border bg-yellow-50 overflow-hidden shadow-brutal-sm print:shadow-none print:border-3 print:border-black"
+                            id="card-cut-wrapper">
+
+                            <!-- Frente da Carteirinha -->
+                            <div class="w-full aspect-[1.58/1] relative flex-shrink-0 bg-yellow-50 overflow-hidden">
+                                <div
+                                    class="relative w-full h-full p-3 sm:p-4 flex flex-col justify-between text-primary">
+                                    <!-- Cabeçalho do Cartão -->
+                                    <div class="flex justify-between items-start mb-1.5 pb-1 border-b-2 border-primary">
+                                        <div class="flex items-center gap-2">
+                                            <div
+                                                class="w-6 h-6 sm:w-7 sm:h-7 bg-accent brutal-border flex items-center justify-center transform -rotate-6 shrink-0">
+                                                <span
+                                                    class="material-symbols-outlined text-base sm:text-lg text-primary">pets</span>
+                                            </div>
+                                            <div>
+                                                <p
+                                                    class="text-[7px] sm:text-[8px] font-body-md font-bold uppercase tracking-wider text-primary leading-none">
+                                                    República Federativa do Brasil</p>
+                                                <p
+                                                    class="text-[11px] sm:text-xs font-display-lg font-black uppercase leading-tight text-primary mt-0.5">
+                                                    Registro Geral Animal</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <p
+                                                class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-tight">
+                                                Identificação Pet<br>Nova Mamoré - RO</p>
+                                        </div>
+                                    </div>
+                                    <!-- Corpo do Cartão -->
+                                    <div class="flex gap-2.5 flex-1 items-stretch">
+                                        <!-- Moldura da Foto do Pet -->
+                                        <div class="w-[36%] h-full bg-white border-2 border-primary overflow-hidden flex items-center justify-center relative shadow-brutal-sm shrink-0 cursor-grab active:cursor-grabbing select-none"
+                                            id="preview-photo-frame">
+                                            <span
+                                                class="material-symbols-outlined text-2xl text-primary">photo_camera</span>
+                                            <div class="absolute inset-0 bg-cover bg-center hidden z-10 pointer-events-none"
+                                                id="preview-photo"></div>
+                                        </div>
+                                        <!-- Campos de Informação -->
+                                        <div class="w-[64%] flex flex-col justify-between py-0.5">
+                                            <div
+                                                class="mb-1 bg-secondary p-1 sm:p-1.5 brutal-border min-h-[34px] flex flex-col justify-center">
+                                                <p
+                                                    class="text-[7px] font-body-md font-bold uppercase tracking-wider text-primary leading-none mb-0.5">
+                                                    Nome do Pet</p>
+                                                <p class="font-display-lg text-xs sm:text-sm font-black leading-tight text-primary uppercase break-words whitespace-normal"
+                                                    id="preview-name">Rex</p>
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-x-2 gap-y-0.5">
+                                                <div class="bg-white border-b border-primary">
+                                                    <p
+                                                        class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none">
+                                                        Espécie</p>
+                                                    <p class="text-[10px] sm:text-xs font-display-lg font-bold text-primary uppercase leading-tight break-words whitespace-normal"
+                                                        id="preview-species">Canina</p>
+                                                </div>
+                                                <div class="bg-white border-b border-primary">
+                                                    <p
+                                                        class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none">
+                                                        Raça</p>
+                                                    <p class="text-[10px] sm:text-xs font-display-lg font-bold text-primary uppercase leading-tight break-words whitespace-normal"
+                                                        id="preview-breed">SRD</p>
+                                                </div>
+                                                <div class="bg-white border-b border-primary">
+                                                    <p
+                                                        class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none">
+                                                        Sexo</p>
+                                                    <p class="text-[10px] sm:text-xs font-display-lg font-bold text-primary uppercase leading-tight break-words whitespace-normal"
+                                                        id="preview-sex">Macho</p>
+                                                </div>
+                                                <div class="bg-white border-b border-primary">
+                                                    <p
+                                                        class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none">
+                                                        Pelagem</p>
+                                                    <p class="text-[10px] sm:text-xs font-display-lg font-bold text-primary uppercase leading-tight break-words whitespace-normal"
+                                                        id="preview-pelagem">Pelo Liso</p>
+                                                </div>
+                                                <div class="bg-white border-b border-primary">
+                                                    <p
+                                                        class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none">
+                                                        Cor</p>
+                                                    <p class="text-[10px] sm:text-xs font-display-lg font-bold text-primary uppercase leading-tight break-words whitespace-normal"
+                                                        id="preview-color">Caramelo</p>
+                                                </div>
+                                                <div class="bg-white border-b border-primary">
+                                                    <p
+                                                        class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none">
+                                                        Peso</p>
+                                                    <p class="text-[10px] sm:text-xs font-display-lg font-bold text-primary uppercase leading-tight break-words whitespace-normal"
+                                                        id="preview-weight">---</p>
+                                                </div>
+                                                <div class="bg-white border-b border-primary col-span-2">
+                                                    <p
+                                                        class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none">
+                                                        Microchip ID</p>
+                                                    <p class="text-[10px] sm:text-xs font-display-lg font-bold text-primary uppercase leading-tight break-words whitespace-normal"
+                                                        id="preview-microchip">---</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Divisória Central de Dobra -->
+                            <div class="w-full border-t-2 border-dashed border-primary my-0"></div>
+
+                            <!-- Verso da Carteirinha -->
+                            <div class="w-full aspect-[1.58/1] relative flex-shrink-0 bg-yellow-50 overflow-hidden">
+                                <div class="relative w-full h-full p-3 sm:p-4 flex flex-col justify-between">
+                                    <div class="flex gap-3 h-full">
+                                        <!-- Coluna Esquerda -->
+                                        <div
+                                            class="w-[58%] flex flex-col justify-between border-r-2 border-primary pr-2.5">
+                                            <div class="bg-accent p-1.5 brutal-border mb-1">
+                                                <p
+                                                    class="text-[7px] font-body-md font-bold uppercase text-primary leading-none mb-0.5">
+                                                    Tutor Amoroso</p>
+                                                <p class="text-xs sm:text-sm font-display-lg font-bold uppercase leading-tight text-primary break-words whitespace-normal"
+                                                    id="preview-tutor">Seu Nome</p>
+                                            </div>
+
+                                            <div class="bg-white border-b border-primary my-0.5">
+                                                <p
+                                                    class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none">
+                                                    Telefone de Contato</p>
+                                                <p class="text-[10px] sm:text-xs font-display-lg font-bold uppercase text-primary leading-tight break-words"
+                                                    id="preview-phone">(00) 00000-0000</p>
+                                            </div>
+
+                                            <!-- Campo para Assinatura do Tutor -->
+                                            <div
+                                                class="bg-white border border-primary px-1 pt-4 pb-1 my-1 text-center min-h-[38px] flex flex-col justify-end">
+                                                <div class="border-b border-primary w-[96%] mx-auto mb-0.5"></div>
+                                                <p
+                                                    class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none tracking-wider">
+                                                    Assinatura do Tutor</p>
+                                            </div>
+
+                                            <div class="mt-auto flex items-end justify-between w-full pt-1">
+                                                <div class="flex items-end gap-1.5">
+                                                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-white p-0.5 brutal-border shrink-0 flex items-center justify-center relative overflow-hidden"
+                                                        id="qr-container">
+                                                        <span class="material-symbols-outlined text-xl text-primary"
+                                                            id="qr-placeholder-icon">qr_code_2</span>
+                                                        <!-- QR Code de registro -->
+                                                        <img id="preview-qr-img" alt="QR Code RGA"
+                                                            class="w-full h-full object-contain hidden relative z-10">
+                                                    </div>
+                                                    <div class="text-left">
+                                                        <p
+                                                            class="text-[6px] sm:text-[7px] font-body-md font-bold uppercase text-primary leading-none">
+                                                            Emissão</p>
+                                                        <p class="text-[9px] sm:text-[10px] font-body-lg font-black text-primary leading-tight"
+                                                            id="preview-issue-date">29/07/2026</p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Foto do Tutor (Posicionada à direita na mesma linha horizontal do QR Code) -->
+                                                <div class="w-9 h-9 sm:w-11 sm:h-11 bg-white brutal-border border-2 overflow-hidden items-center justify-center relative hidden shadow-brutal-sm shrink-0"
+                                                    id="preview-tutor-photo-container">
+                                                    <span
+                                                        class="material-symbols-outlined text-base text-primary">person</span>
+                                                    <div class="absolute inset-0 bg-cover bg-center hidden z-10"
+                                                        id="preview-tutor-photo"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Coluna Direita -->
+                                        <div class="w-[42%] flex flex-col justify-between pl-1.5">
+                                            <div class="text-right bg-white border border-primary p-1">
+                                                <p
+                                                    class="text-[7px] font-body-md font-bold uppercase text-primary leading-none mb-0.5">
+                                                    Nº Registro (RGA)</p>
+                                                <p class="text-[10px] sm:text-xs font-body-lg font-black text-primary leading-none"
+                                                    id="preview-rga">2027.8492.31</p>
+                                            </div>
+                                            <!-- Selo de Autenticidade -->
+                                            <div class="mt-auto self-end flex flex-col items-center">
+                                                <div
+                                                    class="w-16 h-16 sm:w-20 sm:h-20 bg-secondary brutal-border shadow-brutal-sm flex flex-col items-center justify-center transform hover:rotate-6 transition-transform cursor-pointer p-1">
+                                                    <span
+                                                        class="material-symbols-outlined text-primary text-lg sm:text-2xl font-black leading-none mb-0.5">verified</span>
+                                                    <span
+                                                        class="text-[7px] sm:text-[8px] font-display-lg uppercase text-primary font-black text-center leading-[1.1] tracking-tighter px-0.5">Selo
+                                                        de<br>Autenticidade</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Botão de Download do RG -->
+                    <div class="w-full max-w-[460px] mt-6">
+                        <button
+                            class="w-full bg-accent text-primary px-6 py-3.5 brutal-border font-display-lg text-lg uppercase shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 active:shadow-brutal-active active:translate-y-0.5 transition-all flex items-center justify-center gap-3 transform rotate-1"
+                            id="btn-download-preview">
+                            <span class="material-symbols-outlined font-bold text-2xl">download</span>
+                            BAIXAR RG PET DIGITAL
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Seção Informativa: Saúde & ODS ONU -->
+        <section class="max-w-5xl mx-auto px-4 mb-24 md:mb-32 relative" id="saude-info">
+            <div class="bg-white p-6 md:p-8 brutal-border shadow-brutal relative transform -rotate-0.5">
+                <div
+                    class="bg-secondary inline-block px-4 py-2 brutal-border shadow-brutal-sm transform -rotate-1 mb-6">
+                    <h2 class="text-2xl md:text-3xl font-display-lg text-primary uppercase">Saúde, Proteção & ODS ONU
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-2">
+                    <!-- Card 1 -->
+                    <div
+                        class="bg-background p-5 brutal-border shadow-brutal-sm flex flex-col justify-between transform -rotate-1">
+                        <div>
+                            <div class="w-12 h-12 bg-accent brutal-border flex items-center justify-center mb-4">
+                                <span class="material-symbols-outlined text-2xl text-primary">vaccines</span>
+                            </div>
+                            <h3 class="text-lg font-display-lg text-primary mb-2 uppercase">Conscientização & Vacinação
+                            </h3>
+                            <p class="text-xs font-body-md text-primary leading-relaxed">
+                                A vacinação anual é uma das principais formas de cuidar do seu companheiro e fortalecer
+                                a prevenção de doenças na nossa comunidade de Nova Mamoré - RO.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div
+                        class="bg-background p-5 brutal-border shadow-brutal-sm flex flex-col justify-between transform rotate-1">
+                        <div>
+                            <div class="w-12 h-12 bg-secondary brutal-border flex items-center justify-center mb-4">
+                                <span class="material-symbols-outlined text-2xl text-primary">badge</span>
+                            </div>
+                            <h3 class="text-lg font-display-lg text-primary mb-2 uppercase">O Valor do RG Pet</h3>
+                            <p class="text-xs font-body-md text-primary leading-relaxed">
+                                Uma lembrança simbólica e carinhosa para celebrar a união com seu animal, promovendo a
+                                afeição, o cuidado e a posse responsável no dia a dia.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div
+                        class="bg-background p-5 brutal-border shadow-brutal-sm flex flex-col justify-between transform -rotate-1">
+                        <div>
+                            <div class="w-12 h-12 bg-accent brutal-border flex items-center justify-center mb-4">
+                                <span class="material-symbols-outlined text-2xl text-primary">school</span>
+                            </div>
+                            <h3 class="text-lg font-display-lg text-primary mb-2 uppercase">Projeto & ODS ONU</h3>
+                            <p class="text-xs font-body-md text-primary leading-relaxed">
+                                Iniciativa universitária focada no bem-estar animal em Nova Mamoré, inspirada nos
+                                Objetivos de Desenvolvimento Sustentável da ONU (ODS 3, ODS 15 e ODS 17).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Banner da Campanha de Vacinação -->
+        <section class="mb-24 md:mb-32 px-4 relative" id="campanha">
+            <div
+                class="absolute -top-6 left-1/4 text-primary transform rotate-12 z-20 hidden sm:block pointer-events-none">
+                <span class="material-symbols-outlined"
+                    style="font-size: 36px; font-variation-settings: 'FILL' 1;">calendar_month</span>
+            </div>
+            <div
+                class="max-w-5xl mx-auto bg-accent brutal-border shadow-brutal flex flex-col md:flex-row items-stretch transform rotate-1 relative z-10">
+                <!-- Imagem Lateral -->
+                <div
+                    class="w-full md:w-5/12 min-h-[220px] md:min-h-[280px] border-b-3 md:border-b-0 md:border-r-3 border-primary relative">
+                    <img alt="Veterinário com pets" class="absolute inset-0 w-full h-full object-cover"
+                        src="assets/img/vaccination-banner.png">
+                </div>
+                <!-- Conteúdo -->
+                <div class="w-full md:w-7/12 p-6 md:p-8 flex flex-col justify-center relative bg-accent">
+                    <div
+                        class="bg-white inline-block px-3 py-1.5 brutal-border shadow-brutal-sm transform -rotate-2 mb-4 self-start">
+                        <h2 class="text-xl md:text-2xl font-display-lg text-primary uppercase">Campanha de Vacinação
+                            Antirrábica • Nova Mamoré / RO</h2>
+                    </div>
+                    <p
+                        class="text-sm md:text-base font-body-md font-bold mb-4 text-primary bg-white p-3 brutal-border transform rotate-1">
+                        Quer manter a saúde do seu amiguinho sempre em dia? Adicione um lembrete no seu calendário para
+                        conferir anualmente se a vacina do seu pet precisa ser renovada e liberar o seu RG Digital!
+                    </p>
+                    <div class="space-y-4">
+                        <button
+                            class="w-full bg-secondary text-primary px-5 py-3 brutal-border font-display-lg text-lg uppercase shadow-brutal hover:shadow-brutal-hover hover:-translate-y-0.5 active:shadow-brutal-active active:translate-y-0.5 transition-all flex items-center justify-center gap-2 transform -rotate-1"
+                            id="btn-agenda">
+                            <span class="material-symbols-outlined font-bold text-xl">edit_calendar</span>
+                            ADICIONAR AO CALENDÁRIO
+                        </button>
+                        <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                            <button
+                                class="flex-1 w-full bg-gray-200 border-3 border-gray-400 text-gray-500 px-6 py-3 font-display-lg text-lg uppercase flex items-center justify-center gap-2 transition-all duration-300 cursor-not-allowed brutal-border"
+                                disabled="" id="btn-baixar">
+                                <span class="material-symbols-outlined text-xl">lock</span>
+                                BAIXAR RG PET DIGITAL
+                            </button>
+                            <p class="text-xs sm:text-sm font-label-md font-bold bg-white px-3 py-2 brutal-border transform rotate-2 text-center shrink-0"
+                                id="status-msg">Ative o lembrete p/ liberar!</p>
+                        </div>
+                    </div>
+                    <!-- Guia Informativo e Esclarecimentos sobre Vacinação -->
+                    <div
+                        class="mt-5 p-3.5 bg-white brutal-border shadow-brutal-sm text-xs font-body-md text-primary transform -rotate-1 space-y-2">
+                        <p class="font-bold flex items-center gap-1.5 text-primary border-b border-primary pb-1">
+                            <span class="material-symbols-outlined text-base text-accent">info</span>
+                            <span>Informações Importantes & Dicas Úteis:</span>
+                        </p>
+                        <ul class="space-y-1.5 text-[11px] leading-relaxed list-disc list-inside">
+                            <li><strong>Seu pet precisa vacinar agora?</strong> A vacina antirrábica é recomendada uma
+                                vez ao ano. Se o seu amiguinho já tomou a vacina nos últimos 12 meses ou tem menos de 3
+                                meses, não é necessário vacinar novamente agora!</li>
+                            <li><strong>Locais e Datas Oficiais:</strong> As datas e pontos de vacinação variam e são
+                                divulgados anualmente nos canais oficiais da Prefeitura e Secretaria de Saúde de Nova
+                                Mamoré - RO (ou da sua cidade).</li>
+                            <li><strong>Documentos:</strong> É recomendável levar a carteira de vacinação tradicional se
+                                tiver, mas não é obrigatório. O RG Pet Digital é um documento afetivo e educativo para
+                                você guardar com carinho.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer
+        class="bg-primary text-white border-t-4 border-secondary w-full px-4 py-14 md:py-16 relative z-10 overflow-hidden">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
+            <div
+                class="text-2xl font-display-lg uppercase tracking-tighter transform -rotate-1 bg-secondary text-primary px-3 py-1 brutal-border">
+                RG Pet Digital</div>
+            <div class="flex flex-wrap justify-center gap-5 text-base font-label-md uppercase">
+                <button
+                    class="hover:text-secondary hover:underline decoration-2 underline-offset-4 transition-colors cursor-pointer"
+                    id="footer-privacidade">Privacidade</button>
+                <button
+                    class="hover:text-accent hover:underline decoration-2 underline-offset-4 transition-colors cursor-pointer"
+                    id="footer-termos">Termos</button>
+                <button
+                    class="hover:text-secondary hover:underline decoration-2 underline-offset-4 transition-colors cursor-pointer"
+                    id="footer-contato">Contato</button>
+            </div>
+            <div
+                class="text-sm font-body-md font-bold uppercase text-center md:text-right bg-white text-primary px-3 py-1 brutal-border transform rotate-1">
+                © 2027 RG Pet Digital • Projeto ODS Uninter • Nova Mamoré - RO
+            </div>
+        </div>
+    </footer>
+
+    <!-- Componente de Modal Reutilizável -->
+    <div class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden modal-backdrop"
+        id="modal-container">
+        <div class="bg-white brutal-border shadow-brutal max-w-md w-full p-6 relative transform -rotate-1 modal-card"
+            id="modal-card">
+            <!-- Cabeçalho do Modal -->
+            <div class="flex justify-between items-center pb-4 mb-4 border-b-3 border-primary">
+                <h3 class="text-xl font-display-lg text-primary uppercase" id="modal-title">Título do Modal</h3>
+                <button
+                    class="w-8 h-8 bg-accent text-primary brutal-border shadow-brutal-sm flex items-center justify-center font-bold text-lg hover:bg-white transition-colors cursor-pointer"
+                    id="modal-close">
+                    ✕
+                </button>
+            </div>
+            <!-- Corpo do Modal -->
+            <div class="text-sm font-body-md text-primary leading-relaxed space-y-3" id="modal-body">
+                Conteúdo do modal...
+            </div>
+            <!-- Botão do Modal -->
+            <div class="pt-5 flex justify-end">
+                <button
+                    class="bg-secondary text-primary px-5 py-2 brutal-border font-display-lg text-sm uppercase shadow-brutal-sm hover:shadow-brutal active:translate-y-0.5 transition-all cursor-pointer"
+                    id="modal-ok">
+                    Entendi!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Principal da Aplicação -->
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
